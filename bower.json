@@ -1,0 +1,17 @@
+{
+  "name": "purescript-flatpickr",
+  "authors": [
+    "Moritz Drexl <mdrexl@fastmail.fm>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "flatpickr": "^2.3.7"
+  }
+}
