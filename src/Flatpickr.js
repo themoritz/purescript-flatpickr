@@ -2,7 +2,7 @@
 
 exports.flatpickrImpl = function (el, config) {
   return function () {
-    return Flatpickr(el, config);
+    return new Flatpickr(el, config);
   };
 };
 
@@ -48,8 +48,10 @@ exports.open = function (self) {
 
 exports.hookImpl = function (name, self, cb) {
   return function () {
-    return self[name] = function (selectedDates, dateStr, instance) {
-      return cb(selectedDates)(dateStr)(instance);
-    };
+    return self["config"][name] = [
+      function (selectedDates, dateStr, instance) {
+        return cb(selectedDates)(dateStr)(instance)();
+      }
+    ];
   };
 };
