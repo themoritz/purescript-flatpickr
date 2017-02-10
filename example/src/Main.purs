@@ -7,7 +7,7 @@ import Control.Monad.Eff.Console (CONSOLE, log)
 import Control.Monad.Except (runExcept)
 import DOM (DOM)
 import DOM.HTML (window)
-import DOM.HTML.Types (htmlDocumentToParentNode, readHTMLElement)
+import DOM.HTML.Types (HTMLElement, htmlDocumentToParentNode, readHTMLElement)
 import DOM.HTML.Window (document)
 import DOM.Node.ParentNode (querySelector)
 import Data.Either (either)
@@ -28,13 +28,17 @@ main = do
       either (const Nothing) Just $ runExcept $ readHTMLElement (toForeign el)
   case mPicker of
     Nothing -> pure unit
-    Just picker -> do
-      fp <- FP.flatpickr picker
-        { enableTime: true
-        }
-      FP.open fp
-      FP.onChange fp \dates dateStr _ -> log $ "Changed " <> dateStr
-      FP.onClose fp \_ _ _ -> log "Closed"
-      pure unit
+    Just picker -> example picker
   pure unit
   
+example
+  :: forall eff
+   . HTMLElement
+  -> Eff (flatpickr :: FLATPICKR, console :: CONSOLE | eff) Unit
+example picker = do
+  fp <- FP.flatpickr picker
+    { enableTime: true
+    }
+  FP.open fp
+  FP.onChange fp \dates dateStr _ -> log $ "Changed " <> dateStr
+  FP.onClose fp \_ _ _ -> log "Closed"

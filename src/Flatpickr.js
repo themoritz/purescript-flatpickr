@@ -44,6 +44,28 @@ exports.open = function (self) {
   };
 };
 
+exports.parseDate = function (date, self) {
+  return function () {
+    return self.parseDate(date);
+  };
+};
+
+exports.redraw = function (self) {
+  return function () {
+    return self.redraw();
+  };
+};
+
+// set
+
+// setDate
+
+exports.toggle = function (self) {
+  return function () {
+    return self.toggle();
+  };
+};
+
 // Hooks
 
 exports.hookImpl = function (name, self, cb) {

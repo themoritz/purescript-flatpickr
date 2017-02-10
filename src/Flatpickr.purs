@@ -7,6 +7,11 @@ module Flatpickr
   , formatDate
   -- , jumpTodate
   , open
+  , parseDate
+  , redraw
+  -- , set
+  -- , setDate
+  , toggle
   -- Hooks
   , onChange
   , onOpen
@@ -45,9 +50,22 @@ foreign import formatDateImpl :: forall eff. Fn3 String JSDate Flatpickr (FlatEf
 formatDate :: forall eff. String -> JSDate -> Flatpickr -> FlatEff eff String
 formatDate = runFn3 formatDateImpl
 
--- jumpToDate
+-- TODO: jumpToDate
 
 foreign import open :: forall eff. Flatpickr -> FlatEff eff Unit
+
+foreign import parseDateImpl :: forall eff. Fn2 String Flatpickr (FlatEff eff String)
+
+parseDate :: forall eff. String -> Flatpickr -> FlatEff eff String
+parseDate = runFn2 parseDateImpl
+
+foreign import redraw :: forall eff. Flatpickr -> FlatEff eff Unit
+
+-- TODO: set
+
+-- TODO: setDate
+
+foreign import toggle :: forall eff. Flatpickr -> FlatEff eff Unit
 
 -- Hooks
 
