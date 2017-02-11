@@ -11,6 +11,10 @@
     "test",
     "tests"
   ],
+  "repository": {                                                          
+    "type": "git",                                                         
+    "url": "git://github.com/themoritz/purescript-flatpickr.git"            
+  },
   "devDependencies": {
     "flatpickr": "flatpickr-calendar#^2.3.7",
     "purescript-console": "^2.0.0"
