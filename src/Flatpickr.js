@@ -1,5 +1,11 @@
 "use strict";
 
+exports.runPredicateImpl = function (pred) {
+  return function(date) {
+    return pred(date)();
+  };
+};
+
 exports.flatpickrImpl = function (el, config) {
   return function () {
     return new Flatpickr(el, config);
@@ -36,7 +42,11 @@ exports.formatDateImpl = function (formatStr, dateObj, self) {
   };
 };
 
-// jumpToDate
+exports.jumpToDateImpl = function (date, self) {
+  return function () {
+    return self.jumpToDate(date);
+  };
+};
 
 exports.open = function (self) {
   return function () {
@@ -44,7 +54,7 @@ exports.open = function (self) {
   };
 };
 
-exports.parseDate = function (date, self) {
+exports.parseDateImpl = function (date, self) {
   return function () {
     return self.parseDate(date);
   };
@@ -56,9 +66,17 @@ exports.redraw = function (self) {
   };
 };
 
-// set
+exports.setImpl = function (option, value, self) {
+  return function () {
+    return self.set(option, value);
+  };
+};
 
-// setDate
+exports.setDateImpl = function (date, triggerChange, self) {
+  return function () {
+    return self.setDate(date, triggerChange);
+  };
+};
 
 exports.toggle = function (self) {
   return function () {
@@ -66,14 +84,16 @@ exports.toggle = function (self) {
   };
 };
 
-// Hooks
+exports.runHookImpl = function (cb) {
+  return function(selectedDates, dateStr, instance) {
+    return cb(selectedDates)(dateStr)(instance)();
+  };
+};
 
 exports.hookImpl = function (name, self, cb) {
   return function () {
     return self["config"][name] = [
-      function (selectedDates, dateStr, instance) {
-        return cb(selectedDates)(dateStr)(instance)();
-      }
+      exports.runHookImpl(cb)
     ];
   };
 };

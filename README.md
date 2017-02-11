@@ -2,12 +2,6 @@
 
 PureScript bindings for [flatpickr](https://chmln.github.io/flatpickr/).
 
-## Options
-
-Options are given to the `flatpickr` function as an untyped record. See the
-flatpickr manual for
-[available options](https://chmln.github.io/flatpickr/#options).
-
 ## Run the example
 
 ``` shell
