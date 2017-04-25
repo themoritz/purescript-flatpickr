@@ -1,6 +1,6 @@
 module Flatpickr.Config where
 
-import Control.Monad.Eff (Eff)
+import Control.Monad.Eff (Eff, kind Effect)
 import DOM.HTML.Types (HTMLElement)
 import Data.JSDate (JSDate)
 import Data.Maybe (Maybe(..))
@@ -84,7 +84,7 @@ defaultConfig =
   , wrap                  : false
   }
   
-data SetOption (eff :: # !)
+data SetOption (eff :: # Effect)
   = SetAltFormat             String
   | SetAltInput              Boolean
   | SetAltInputClass         String

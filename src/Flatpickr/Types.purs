@@ -1,10 +1,10 @@
 module Flatpickr.Types where
 
 import Prelude
-import Control.Monad.Eff (Eff)
+import Control.Monad.Eff (Eff, kind Effect)
 import Data.JSDate (JSDate)
 
-foreign import data FLATPICKR :: !
+foreign import data FLATPICKR :: Effect
 
 data Flatpickr
 

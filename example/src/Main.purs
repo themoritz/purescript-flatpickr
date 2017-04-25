@@ -9,24 +9,23 @@ import DOM (DOM)
 import DOM.HTML (window)
 import DOM.HTML.Types (HTMLElement, htmlDocumentToParentNode, readHTMLElement)
 import DOM.HTML.Window (document)
-import DOM.Node.ParentNode (querySelector)
+import DOM.Node.ParentNode (querySelector, QuerySelector(..))
 import Data.Either (either)
 import Data.Foreign (toForeign)
 import Data.JSDate (getUTCDate, jsdate, toDateTime)
 import Data.Maybe (Maybe(..))
-import Data.Nullable (toMaybe)
 import Flatpickr.Config (SetOption(..), defaultConfig)
 import Flatpickr.Types (DateSet(..), DateType(..), FLATPICKR)
 
 main :: Eff (console :: CONSOLE, flatpickr :: FLATPICKR, dom :: DOM) Unit
 main = do
-  nullableEl <-
+  maybeEl <-
     window >>=
     document >>=
-    (htmlDocumentToParentNode >>> querySelector "#flatpickr")
+    (htmlDocumentToParentNode >>> querySelector (QuerySelector "#flatpickr"))
   let
     mPicker = do
-      el <- toMaybe nullableEl
+      el <- maybeEl
       either (const Nothing) Just $ runExcept $ readHTMLElement (toForeign el)
   case mPicker of
     Nothing -> pure unit
@@ -64,8 +63,8 @@ example picker = do
     , hourIncrement = 3
     }
   FP.open fp
-  FP.jumpToDate (DateJSDate someJSDate) fp
-  FP.setDate (DateString "2017-01-29") false fp
+  _ <- FP.jumpToDate (DateJSDate someJSDate) fp
+  _ <- FP.setDate (DateString "2017-01-29") false fp
   FP.onChange fp \dates dateStr _ -> do
     log $ "Changed " <> dateStr
     log $ show $ map toDateTime dates
