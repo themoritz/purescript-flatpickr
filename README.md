@@ -1,5 +1,8 @@
 # purescript-flatpickr
 
+[![Latest release](http://img.shields.io/github/release/themoritz/purescript-flatpickr.svg)](https://github.com/themoritz/purescript-flatpickr/releases)
+[![Build status](https://travis-ci.org/themoritz/purescript-flatpickr.svg?branch=master)](https://travis-ci.org/themoritz/purescript-flatpickr)
+
 PureScript bindings for [flatpickr](https://chmln.github.io/flatpickr/).
 
 ## Run the example

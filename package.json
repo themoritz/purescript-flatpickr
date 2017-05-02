@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "clean": "rimraf output && rimraf .pulp-cache",
+    "build": "pulp build -- --censor-lib --strict",
+    "example": "pulp browserify --include example/src --to example/dist/bundle.js -- --censor-lib --strict"
+  },
+  "devDependencies": {
+    "pulp": "^11.0.0",
+    "purescript": "^0.11.4",
+    "purescript-psa": "^0.5.1",
+    "rimraf": "^2.6.1"
+  }
+}
